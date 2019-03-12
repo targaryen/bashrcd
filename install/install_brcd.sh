@@ -2,6 +2,7 @@
 
 BACKUPDIR=${BACKUPDIR:-~/.backup}
 BASHRCFILE=${BASHRCFILE:-~/.bashrc}
+BRCDIR=${BRCDIR:-~/.bashrcd}
 
 BACKUPFILE=${BACKUPFILE:-${BACKUPDIR}/bashrcd/bashrc.$(date +%Y%m%d%H%S)}
 
@@ -33,7 +34,7 @@ check_bashrcd_installed(){
 
 
 install_bashrcd(){
-    BRCDIR=${BRCDIR:-~/.bashrcd}
+
     mkdir -p ${BRCDIR}
 
     cat <<EOF >> ${BASHRCFILE}
