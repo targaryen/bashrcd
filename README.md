@@ -25,6 +25,6 @@ Some items that will be nice to add in future:
 Note:  In progress:
 
 ```
-curl -s https://xxx/repo/install_brcd.sh/raw | bash  
+curl -s https://raw.githubusercontent.com/targaryen/bashrcd/master/install/install_brcd.sh | bash  
 
 ```
