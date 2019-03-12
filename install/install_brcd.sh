@@ -24,7 +24,9 @@ check_bashrcd_installed(){
       echo
       sed -n '/BRCDIR START/,/BRCDIR END/ p' ${BASHRCFILE}
       echo
-      echo "You can run remove_bashrcd.sh to remove the above"
+      echo "You can run remove_bashrcd.sh to remove the above if local, or run from GitHub, eg:"
+      echo
+      echo     curl -s https://raw.githubusercontent.com/targaryen/bashrcd/master/install/remove_brcd.sh | bash
       echo
       echo "Aborting..."
       echo
