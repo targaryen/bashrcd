@@ -1,0 +1,40 @@
+BRCDIR=${BRCDIR:-~/.bashrcd}
+
+brcfilename(){
+
+  if [ "$#" -gt 1 ]; then
+
+    if [ "$#" -gt 2 ]; then
+      echo "Error:  Invalid number of paramaeters (expects one or two params, received: $#)"
+      exit 1
+    fi
+
+    if [[ $1 =~ ^-?[0-9]+$ ]]; then
+      num=$(printf %04d $1)
+      echo "$BRCDIR/$num--$2"
+    else
+      echo Error: If passing priority, it must be a number
+      exit 1
+    fi
+  elif [ "$#" -eq 1 ]; then
+    echo "$BRCDIR/0100--$1"
+  fi
+
+}
+
+
+function remove_bashrcd() {
+
+if [ -d $BRCDIR ]; then
+  brcfile=$(brcfilename $@)
+
+  if [ -f $brcfile ]; then
+    rm -i $brcfile && . ~/.bashrc
+  else
+    echo "No file to remove: $brcfile" && . ~/.bashrc
+  fi
+fi
+
+}
+
+alias rbrc='remove_bashrcd'
