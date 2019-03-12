@@ -53,7 +53,9 @@ EOF
 
 }
 
-
+curl -s https://github.com/targaryen/bashrcd/blob/master/aliases/0010--ebrc -o ${BRCDIR}/0010--ebrc
+curl -s https://github.com/targaryen/bashrcd/blob/master/aliases/0010--lbrc -o ${BRCDIR}/0010--lbrc
+curl -s https://github.com/targaryen/bashrcd/blob/master/aliases/0010--rbrc -o ${BRCDIR}/0010--rbrc
 
 check_bashrcd_installed
 
