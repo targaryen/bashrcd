@@ -1,0 +1,74 @@
+copy_recursive_fantasy() {
+    mkdir -p /home/kruppe/volumes/resilio/sync/all-audio/fantasy/$2
+    cp -r "$1" "$2"
+}
+
+copy_recursive_scifi() {
+    mkdir -p /home/kruppe/volumes/resilio/sync/all-audio/scifi/$2
+    cp -r "$1" "$2"
+}
+
+check_dir_fantasy() {
+    local path=""
+    for arg in "$@"; do
+        path+="${arg} "  # Add each argument to path with a space
+    done
+    path="${path% }"   # Trim the trailing space
+    ls -la "/home/kruppe/volumes/resilio/sync/all-audio/fantasy/${path}"
+}
+
+
+check_dir_scifi() {
+    local path=""
+    for arg in "$@"; do
+        path+="${arg} "  # Add each argument to path with a space
+    done
+    path="${path% }"   # Trim the trailing space
+    ls -la "/home/kruppe/volumes/resilio/sync/all-audio/scifi/${path}"
+}
+
+
+alias crf='copy_recursive_fantasy'
+alias ccf='check_dir_fantasy'
+
+alias crs='copy_recursive_scifi'
+alias ccs='check_dir_scifi'
+
+_ccf_complete() {
+    local IFS=$'\n'
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local base_path="/home/kruppe/volumes/resilio/sync/all-audio/fantasy/"
+    COMPREPLY=( $(compgen -d "${base_path}${cur}" | sed -e "s|^${base_path}||") )
+}
+
+_crf_complete() {
+    if [ $COMP_CWORD -eq 2 ]; then
+        local IFS=$'\n'
+        local cur=${COMP_WORDS[COMP_CWORD]}
+        local base_path="/home/kruppe/volumes/resilio/sync/all-audio/fantasy/"
+        COMPREPLY=( $(compgen -d "${base_path}${cur}" | sed -e "s|^${base_path}||") )
+    fi
+}
+
+complete -F _ccf_complete ccf
+complete -F _crf_complete crf
+
+
+_ccs_complete() {
+    local IFS=$'\n'
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local base_path="/home/kruppe/volumes/resilio/sync/all-audio/scifi/"
+    COMPREPLY=( $(compgen -d "${base_path}${cur}" | sed -e "s|^${base_path}||") )
+}
+
+_crs_complete() {
+    if [ $COMP_CWORD -eq 2 ]; then
+        local IFS=$'\n'
+        local cur=${COMP_WORDS[COMP_CWORD]}
+        local base_path="/home/kruppe/volumes/resilio/sync/all-audio/scifi/"
+        COMPREPLY=( $(compgen -d "${base_path}${cur}" | sed -e "s|^${base_path}||") )
+    fi
+}
+
+complete -F _ccs_complete ccs
+complete -F _crs_complete crs
